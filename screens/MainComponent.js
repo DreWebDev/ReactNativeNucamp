@@ -1,11 +1,15 @@
+import React from "react";
 import { Platform, View } from "react-native";
 import Constants from "expo-constants";
-import CampsiteInfoScreen from "./CampsiteInfoScreen";
-import DirectoryScreen from "./DirectoryScreen";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import HomeScreen from "./HomeScreen";
+import DirectoryScreen from "./DirectoryScreen";
+import CampsiteInfoScreen from "./CampsiteInfoScreen";
+import AboutScreen from "./AboutScreen";
+import ContactScreen from "./ContactScreen";
 
+const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 const screenOptions = {
@@ -14,7 +18,6 @@ const screenOptions = {
 };
 
 const HomeNavigator = () => {
-  const Stack = createStackNavigator();
   return (
     <Stack.Navigator screenOptions={screenOptions}>
       <Stack.Screen
@@ -27,7 +30,6 @@ const HomeNavigator = () => {
 };
 
 const DirectoryNavigator = () => {
-  const Stack = createStackNavigator();
   return (
     <Stack.Navigator initialRouteName="Directory" screenOptions={screenOptions}>
       <Stack.Screen
@@ -38,9 +40,27 @@ const DirectoryNavigator = () => {
       <Stack.Screen
         name="CampsiteInfo"
         component={CampsiteInfoScreen}
-        options={({ route }) => ({
-          title: route.params.campsite.name,
-        })}
+        options={({ route }) => ({ title: route.params.campsite.name })}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const AboutNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen name="About" component={AboutScreen} />
+    </Stack.Navigator>
+  );
+};
+
+const ContactNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={screenOptions}>
+      <Stack.Screen
+        name="Contact"
+        component={ContactScreen}
+        options={{ title: "Contact Us" }}
       />
     </Stack.Navigator>
   );
@@ -67,6 +87,16 @@ const Main = () => {
           name="Directory"
           component={DirectoryNavigator}
           options={{ title: "Directory" }}
+        />
+        <Drawer.Screen
+          name="About"
+          component={AboutNavigator}
+          options={{ title: "About" }}
+        />
+        <Drawer.Screen
+          name="Contact"
+          component={ContactNavigator}
+          options={{ title: "Contact Us" }}
         />
       </Drawer.Navigator>
     </View>
