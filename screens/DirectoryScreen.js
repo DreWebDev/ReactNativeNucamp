@@ -4,7 +4,7 @@ import { Avatar, ListItem } from "react-native-elements";
 const DirectoryScreen = (props) => {
   const renderDirectoryItem = ({ item: campsite }) => {
     return (
-      <ListItem onPress={() => props.onPress(campsite.id)}>
+      <ListItem>
         <Avatar source={campsite.image} rounded />
         <ListItem.Content>
           <ListItem.Title>{campsite.name}</ListItem.Title>
